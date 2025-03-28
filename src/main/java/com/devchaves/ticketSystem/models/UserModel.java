@@ -1,8 +1,6 @@
 package com.devchaves.ticketSystem.models;
 
 import jakarta.persistence.*;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.io.Serializable;
 import java.util.UUID;
@@ -21,6 +19,9 @@ public class UserModel implements Serializable {
     @Column(nullable = false)
     private String users_pass;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private RoleEnum users_role;
 
 
 
