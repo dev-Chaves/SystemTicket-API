@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -33,5 +34,7 @@ public class TicketModel implements Serializable {
     @Column(nullable = false)
     private LocalDateTime createdAt;
 
+    @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CommentModel> comments;
 
 }

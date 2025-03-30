@@ -27,4 +27,7 @@ public class UserModel implements Serializable {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TicketModel> tickets;
 
+    @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CommentModel> comments;
+
 }
