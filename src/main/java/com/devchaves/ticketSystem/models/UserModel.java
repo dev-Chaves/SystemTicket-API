@@ -3,6 +3,7 @@ package com.devchaves.ticketSystem.models;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -23,6 +24,7 @@ public class UserModel implements Serializable {
     @Column(nullable = false)
     private RoleEnum users_role;
 
-
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TicketModel> tickets;
 
 }
