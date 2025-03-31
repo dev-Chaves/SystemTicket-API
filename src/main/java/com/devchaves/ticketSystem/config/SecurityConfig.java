@@ -24,8 +24,7 @@ public class SecurityConfig {
                         .requestMatchers("/teste").permitAll()
                         .anyRequest().authenticated())
                 .formLogin(Customizer.withDefaults());
-//                .oauth2Client(Customizer.withDefaults())
-//                .oauth2Login(Customizer.withDefaults());
+
 
         return http.build();
 
