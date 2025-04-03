@@ -12,17 +12,17 @@ public class UserModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID users_id;
+    private UUID userId;
 
     @Column(nullable = false, unique = true)
-    private String users_name;
+    private String usersName;
 
     @Column(nullable = false)
-    private String users_pass;
+    private String usersPass;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private RoleEnum users_role;
+    private RoleEnum usersRole;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TicketModel> tickets;
@@ -30,11 +30,11 @@ public class UserModel implements Serializable {
     @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CommentModel> comments;
 
-    public UserModel(UUID users_id, String users_name, String users_pass, RoleEnum users_role, List<TicketModel> tickets, List<CommentModel> comments) {
-        this.users_id = users_id;
-        this.users_name = users_name;
-        this.users_pass = users_pass;
-        this.users_role = users_role;
+    public UserModel(UUID userId, String usersName, String usersPass, RoleEnum usersRole, List<TicketModel> tickets, List<CommentModel> comments) {
+        this.userId = userId;
+        this.usersName = usersName;
+        this.usersPass = usersPass;
+        this.usersRole = usersRole;
         this.tickets = tickets;
         this.comments = comments;
     }
@@ -42,36 +42,36 @@ public class UserModel implements Serializable {
     public UserModel() {
     }
 
-    public UUID getUsers_id() {
-        return users_id;
+    public UUID getUserId() {
+        return userId;
     }
 
-    public void setUsers_id(UUID users_id) {
-        this.users_id = users_id;
+    public void setUserId(UUID userId) {
+        this.userId = userId;
     }
 
-    public String getUsers_name() {
-        return users_name;
+    public String getUsersName() {
+        return usersName;
     }
 
-    public void setUsers_name(String users_name) {
-        this.users_name = users_name;
+    public void setUsersName(String usersName) {
+        this.usersName = usersName;
     }
 
-    public String getUsers_pass() {
-        return users_pass;
+    public String getUsersPass() {
+        return usersPass;
     }
 
-    public void setUsers_pass(String users_pass) {
-        this.users_pass = users_pass;
+    public void setUsersPass(String usersPass) {
+        this.usersPass = usersPass;
     }
 
-    public RoleEnum getUsers_role() {
-        return users_role;
+    public RoleEnum getUsersRole() {
+        return usersRole;
     }
 
-    public void setUsers_role(RoleEnum users_role) {
-        this.users_role = users_role;
+    public void setUsersRole(RoleEnum usersRole) {
+        this.usersRole = usersRole;
     }
 
     public List<TicketModel> getTickets() {
