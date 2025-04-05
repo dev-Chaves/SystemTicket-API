@@ -21,15 +21,13 @@ public class UserService {
         this.tokenService = tokenService;
     }
 
-    public ResponseEntity userLogin(UserCreateDTO userDTO){
+    public ResponseEntity<UserResponseDTO> userLogin(UserCreateDTO userDTO){
 
         validateLoginCredentials(userDTO);
 
         UserModel user = findValidateUser(userDTO);
 
-        String token = this.tokenService.generateToken(user);
-
-        return new ResponseEntity(new UserResponseDTO(user.getUsersName(), token), HttpStatus.OK);
+        return buildResponse(user);
 
     }
 
@@ -50,6 +48,13 @@ public class UserService {
 
     }
 
+    private ResponseEntity<UserResponseDTO> buildResponse(UserModel user){
+        String token = this.tokenService.generateToken(user);
 
+        UserResponseDTO responseDTO = new UserResponseDTO(user.getUsersName(), token);
+
+        return ResponseEntity.ok(responseDTO);
+
+    }
 
 }
