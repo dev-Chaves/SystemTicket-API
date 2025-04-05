@@ -2,11 +2,11 @@ package com.devchaves.ticketSystem.services;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.devchaves.ticketSystem.util.Util;
 import com.devchaves.ticketSystem.models.UserModel;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.time.*;
 import java.util.Date;
 
 @Service
@@ -15,6 +15,12 @@ public class TokenService {
     @Value("${api.security.token.secret}")
     private String secret;
 
+    private final Util util;
+
+    public TokenService(Util util) {
+        this.util = util;
+    }
+
     public String generateToken(UserModel user) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
@@ -22,7 +28,7 @@ public class TokenService {
             String token = JWT.create()
                     .withSubject(user.getUsersName())
                     .withIssuer("TicketSystem")
-                    .withExpiresAt(Date.from(generationExpirationDate()))
+                    .withExpiresAt(Date.from(util.generationExpirationDate()))
                     .sign(algorithm);
 
             return token;
@@ -46,10 +52,6 @@ public class TokenService {
         } catch (Exception e) {
             throw new RuntimeException("Invalid token", e);
         }
-    }
-
-    private Instant generationExpirationDate() {
-        return LocalDateTime.now().plusHours(3L).atZone(ZoneId.of(("America/Sao_Paulo"))).toInstant();
     }
 
 }
