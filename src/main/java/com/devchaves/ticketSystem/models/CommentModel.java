@@ -27,5 +27,43 @@ public class CommentModel implements Serializable {
     @Column(nullable = false)
     private LocalDateTime created_at;
 
-    // Getters and Setters
+    public UUID getComment_id() {
+        return comment_id;
+    }
+
+    public void setComment_id(UUID comment_id) {
+        this.comment_id = comment_id;
+    }
+
+    public TicketModel getTicket() {
+        return ticket;
+    }
+
+    public void setTicket(TicketModel ticket) {
+        this.ticket = ticket;
+    }
+
+    public UserModel getUser() {
+        return user;
+    }
+
+    public void setUser(UserModel user) {
+        this.user = user;
+    }
+
+    public String getComment_text() {
+        return comment_text;
+    }
+
+    public void setComment_text(String comment_text) {
+        this.comment_text = comment_text;
+    }
+
+    public LocalDateTime getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(LocalDateTime created_at) {
+        this.created_at = created_at;
+    }
 }

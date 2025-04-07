@@ -4,10 +4,11 @@ import com.devchaves.ticketSystem.DTOS.UserCreateDTO;
 import com.devchaves.ticketSystem.DTOS.UserResponseDTO;
 import com.devchaves.ticketSystem.models.UserModel;
 import com.devchaves.ticketSystem.repositories.UserRepository;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UserService {
 
     private final UserRepository userRepository;
@@ -38,7 +39,7 @@ public class UserService {
     }
 
     private UserModel findValidateUser(UserCreateDTO userDTO){
-        var user = userRepository.findUserByUserName(userDTO.getUsersName()).orElseThrow(() -> new RuntimeException("User Not Found"));
+        var user = userRepository.findUserByUsersName(userDTO.getUsersName()).orElseThrow(() -> new RuntimeException("User Not Found"));
 
         if(!passwordEncoder.matches(userDTO.getUsersPass(), user.getUsersPass())){
             throw new RuntimeException("Invalid Credentials");
