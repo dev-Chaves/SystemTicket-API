@@ -7,7 +7,6 @@ public class UserResponseDTO {
     public UserResponseDTO(String usersName, String token) {
     }
 
-    // Getters and Setters
     public String getName() {
         return name;
     }

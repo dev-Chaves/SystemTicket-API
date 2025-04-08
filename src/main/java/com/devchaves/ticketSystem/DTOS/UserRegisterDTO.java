@@ -38,4 +38,13 @@ public class UserRegisterDTO {
     public void setUsersRole(RoleEnum usersRole) {
         this.usersRole = usersRole;
     }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
 }
