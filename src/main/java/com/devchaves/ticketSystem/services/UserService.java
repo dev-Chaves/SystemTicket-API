@@ -3,8 +3,11 @@ package com.devchaves.ticketSystem.services;
 import com.devchaves.ticketSystem.DTOS.UserCreateDTO;
 import com.devchaves.ticketSystem.DTOS.UserRegisterDTO;
 import com.devchaves.ticketSystem.DTOS.UserResponseDTO;
+import com.devchaves.ticketSystem.models.RoleEnum;
 import com.devchaves.ticketSystem.models.UserModel;
 import com.devchaves.ticketSystem.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -25,6 +28,9 @@ public class UserService {
         this.tokenService = tokenService;
     }
 
+    @Value("${admin.token}") // você define no application.properties
+    private String expectedAdminToken;
+
     public ResponseEntity<UserResponseDTO> userLogin(UserCreateDTO userDTO){
 
         validateLoginCredentials(userDTO);
@@ -37,15 +43,23 @@ public class UserService {
 
     public ResponseEntity<UserResponseDTO> userRegister(UserRegisterDTO userDTO){
         Optional<UserModel> user = userRepository.findUserByUsersName(userDTO.getUsersName());
-        
+
         if(user.isPresent()){
             return ResponseEntity.badRequest().body(null);
         }
-        
+
+        RoleEnum role = RoleEnum.ADMIN;
+
+        if(userDTO.getToken() == null || !userDTO.getToken().equals(expectedAdminToken)){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+        }
+
+
         UserModel newUser = new UserModel();
         
         newUser.setUsersName(userDTO.getUsersName());
         newUser.setUsersPass(passwordEncoder.encode(userDTO.getUsersPass()));
+        newUser.setUsersRole(role);
         this.userRepository.save(newUser);
         
         String token = this.tokenService.generateToken(newUser);
