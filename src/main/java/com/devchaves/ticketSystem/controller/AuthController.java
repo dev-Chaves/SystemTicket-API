@@ -1,12 +1,10 @@
 package com.devchaves.ticketSystem.controller;
 
 import com.devchaves.ticketSystem.DTOS.UserCreateDTO;
-import com.devchaves.ticketSystem.DTOS.UserResponseDTO;
-import com.devchaves.ticketSystem.models.UserModel;
+import com.devchaves.ticketSystem.DTOS.UserRegisterDTO;
 import com.devchaves.ticketSystem.repositories.UserRepository;
 import com.devchaves.ticketSystem.services.TokenService;
 import com.devchaves.ticketSystem.services.UserService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,6 +31,11 @@ public class AuthController {
     @PostMapping("login")
     public ResponseEntity login(@RequestBody UserCreateDTO userCreateDTO) {
         return userService.userLogin(userCreateDTO);
+    }
+
+    @PostMapping("register")
+    public ResponseEntity register(@RequestBody UserRegisterDTO userDTO){
+        return userService.userRegister(userDTO);
     }
 
 }
