@@ -34,25 +34,13 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
                     .requestMatchers("/public/**").permitAll()
-                    .requestMatchers("auth/login/").permitAll()
+                    .requestMatchers("/auth/login").permitAll()
+                    .requestMatchers("/auth/register").permitAll()
                     .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
-
-    }
-
-    @Bean
-    public UserDetailsService userDetailsService(){
-
-        UserDetails user = User.builder()
-                .username("user")
-                .password(passwordEncoder().encode("1234"))
-                .roles("USER")
-                .build();
-
-        return new InMemoryUserDetailsManager(user);
 
     }
 
