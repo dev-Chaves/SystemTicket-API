@@ -8,10 +8,9 @@ public class UserRegisterDTO {
     private RoleEnum usersRole;
     private String token;
 
-    public UserRegisterDTO(String usersName, String usersPass, RoleEnum usersRole, String token) {
+    public UserRegisterDTO(String usersName, String usersPass, String token) {
         this.usersName = usersName;
         this.usersPass = usersPass;
-        this.usersRole = usersRole;
         this.token = token;
     }
 

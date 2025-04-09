@@ -28,7 +28,7 @@ public class UserService {
         this.tokenService = tokenService;
     }
 
-    @Value("${admin.token}") // você define no application.properties
+    @Value("${admin.token}")
     private String expectedAdminToken;
 
     public ResponseEntity<UserResponseDTO> userLogin(UserCreateDTO userDTO){
