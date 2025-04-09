@@ -5,6 +5,8 @@ public class UserResponseDTO {
     private String token;
 
     public UserResponseDTO(String usersName, String token) {
+        this.name = usersName;
+        this.token = token;
     }
 
     public String getName() {
