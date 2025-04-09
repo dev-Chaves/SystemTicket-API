@@ -2,6 +2,7 @@ package com.devchaves.ticketSystem.services;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.devchaves.ticketSystem.util.Util;
 import com.devchaves.ticketSystem.models.UserModel;
 import org.springframework.beans.factory.annotation.Value;
@@ -49,8 +50,8 @@ public class TokenService {
 
             return "Token is valid";
 
-        } catch (Exception e) {
-            throw new RuntimeException("Invalid token", e);
+        } catch (JWTVerificationException e) {
+            return null;
         }
     }
 
