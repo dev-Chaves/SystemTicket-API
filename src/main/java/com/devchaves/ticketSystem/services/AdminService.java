@@ -1,6 +1,7 @@
 package com.devchaves.ticketSystem.services;
 
 import com.devchaves.ticketSystem.DTOS.UserCreateDTO;
+import com.devchaves.ticketSystem.models.RoleEnum;
 import com.devchaves.ticketSystem.models.UserModel;
 import com.devchaves.ticketSystem.repositories.UserRepository;
 import org.springframework.http.ResponseEntity;
@@ -25,9 +26,13 @@ public class AdminService {
             return ResponseEntity.badRequest().body(null);
         }
 
+        RoleEnum role = RoleEnum.USER;
+
         var user = new UserModel();
         user.setUsersName(user.getUsersName());
         user.setUsersPass(passwordEncoder.encode(userDTO.getUsersPass()));
+        user.setUsersRole(role);
+
 
         userRepository.save(user);
 
