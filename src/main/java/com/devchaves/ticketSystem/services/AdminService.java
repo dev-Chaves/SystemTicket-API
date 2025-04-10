@@ -1,6 +1,6 @@
 package com.devchaves.ticketSystem.services;
 
-import com.devchaves.ticketSystem.DTOS.UserCreateDTO;
+import com.devchaves.ticketSystem.DTOS.UsersDTO.UserCreateDTO;
 import com.devchaves.ticketSystem.models.RoleEnum;
 import com.devchaves.ticketSystem.models.UserModel;
 import com.devchaves.ticketSystem.repositories.UserRepository;

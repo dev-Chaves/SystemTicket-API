@@ -8,6 +8,7 @@ import com.devchaves.ticketSystem.models.UserModel;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.xml.crypto.Data;
 import java.util.Date;
 
 @Service
@@ -24,12 +25,19 @@ public class TokenService {
 
     public String generateToken(UserModel user) {
         try {
+
+            if(user == null || user.getUsersName() == null) {
+                throw new IllegalArgumentException("User or username cannot be null");
+            }
+
             Algorithm algorithm = Algorithm.HMAC256(secret);
+
+            Date experationDate = Date.from(util.generationExpirationDate());
 
             String token = JWT.create()
                     .withSubject(user.getUsersName())
                     .withIssuer("TicketSystem")
-                    .withExpiresAt(Date.from(util.generationExpirationDate()))
+                    .withExpiresAt(experationDate)
                     .sign(algorithm);
 
             return token;
@@ -49,6 +57,22 @@ public class TokenService {
                     .getSubject();
 
             return "Token is valid";
+
+        } catch (JWTVerificationException e) {
+            return null;
+        }
+    }
+
+    public Date getDateExperation(String token) {
+        try {
+            Algorithm algorithm = Algorithm.HMAC256(secret);
+            Date expirationDate = JWT.require(algorithm)
+                    .withIssuer("TicketSystem")
+                    .build()
+                    .verify(token)
+                    .getExpiresAt();
+
+            return expirationDate;
 
         } catch (JWTVerificationException e) {
             return null;

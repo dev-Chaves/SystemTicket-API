@@ -1,4 +1,4 @@
-package com.devchaves.ticketSystem.DTOS;
+package com.devchaves.ticketSystem.DTOS.UsersDTO;
 
 import com.devchaves.ticketSystem.models.RoleEnum;
 

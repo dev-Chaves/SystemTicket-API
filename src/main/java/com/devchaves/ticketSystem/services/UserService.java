@@ -1,8 +1,8 @@
 package com.devchaves.ticketSystem.services;
 
-import com.devchaves.ticketSystem.DTOS.UserCreateDTO;
-import com.devchaves.ticketSystem.DTOS.UserRegisterDTO;
-import com.devchaves.ticketSystem.DTOS.UserResponseDTO;
+import com.devchaves.ticketSystem.DTOS.UsersDTO.UserCreateDTO;
+import com.devchaves.ticketSystem.DTOS.UsersDTO.UserRegisterDTO;
+import com.devchaves.ticketSystem.DTOS.UsersDTO.UserResponseDTO;
 import com.devchaves.ticketSystem.models.RoleEnum;
 import com.devchaves.ticketSystem.models.UserModel;
 import com.devchaves.ticketSystem.repositories.UserRepository;
@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -63,7 +64,8 @@ public class UserService {
         this.userRepository.save(newUser);
         
         String token = this.tokenService.generateToken(newUser);
-        return ResponseEntity.ok(new UserResponseDTO(newUser.getUsersName(), token));
+        Date dateExperation = this.tokenService.getDateExperation(token);
+        return ResponseEntity.ok(new UserResponseDTO(newUser.getUsersName(), token, dateExperation));
         
     }
 
@@ -81,13 +83,14 @@ public class UserService {
         }
 
         return user;
-
     }
 
     private ResponseEntity<UserResponseDTO> buildResponse(UserModel user){
         String token = this.tokenService.generateToken(user);
 
-        UserResponseDTO responseDTO = new UserResponseDTO(user.getUsersName(), token);
+        Date dateExperation = this.tokenService.getDateExperation(token);
+
+        UserResponseDTO responseDTO = new UserResponseDTO(user.getUsersName(), token, dateExperation);
 
         return ResponseEntity.ok(responseDTO);
 

@@ -35,7 +35,11 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                     .requestMatchers("/public/**").permitAll()
                     .requestMatchers("/auth/login").permitAll()
-                    .requestMatchers("/auth/register").permitAll()
+                        .requestMatchers("/auth/register").permitAll()
+                        .requestMatchers("/v3/api-docs/**").permitAll()
+                    .requestMatchers("/swagger-ui/**").permitAll()
+                        .requestMatchers("/swagger-ui.html").permitAll()
+                        .requestMatchers("/teste/**").permitAll()
                     .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);
