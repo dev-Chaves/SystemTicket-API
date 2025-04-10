@@ -50,13 +50,11 @@ public class TokenService {
     public String validateToken(String token) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
-            JWT.require(algorithm)
+            return JWT.require(algorithm)
                     .withIssuer("TicketSystem")
                     .build()
                     .verify(token)
                     .getSubject();
-
-            return "Token is valid";
 
         } catch (JWTVerificationException e) {
             return null;

@@ -37,4 +37,67 @@ public class TicketModel implements Serializable {
     @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CommentModel> comments;
 
+    public UUID getTicket_id() {
+        return ticket_id;
+    }
+
+    public void setTicket_id(UUID ticket_id) {
+        this.ticket_id = ticket_id;
+    }
+
+    public UserModel getUser() {
+        return user;
+    }
+
+    public void setUser(UserModel user) {
+        this.user = user;
+    }
+
+    public String getTicket_title() {
+        return ticket_title;
+    }
+
+    public void setTicket_title(String ticket_title) {
+        this.ticket_title = ticket_title;
+    }
+
+    public String getTicket_description() {
+        return ticket_description;
+    }
+
+    public void setTicket_description(String ticket_description) {
+        this.ticket_description = ticket_description;
+    }
+
+    public String getTicket_status() {
+        return ticket_status;
+    }
+
+    public void setTicket_status(String ticket_status) {
+        this.ticket_status = ticket_status;
+    }
+
+    public String getObservation() {
+        return observation;
+    }
+
+    public void setObservation(String observation) {
+        this.observation = observation;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public List<CommentModel> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<CommentModel> comments) {
+        this.comments = comments;
+    }
 }
