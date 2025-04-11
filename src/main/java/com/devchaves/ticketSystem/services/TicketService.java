@@ -1,6 +1,7 @@
 package com.devchaves.ticketSystem.services;
 
 import com.devchaves.ticketSystem.DTOS.TicketDTO.TicketRequestDTO;
+import com.devchaves.ticketSystem.DTOS.TicketDTO.TicketResponseDTO;
 import com.devchaves.ticketSystem.models.TicketModel;
 import com.devchaves.ticketSystem.models.UserModel;
 import com.devchaves.ticketSystem.repositories.TicketRepository;
@@ -21,7 +22,7 @@ public class TicketService {
         this.ticketRepository = ticketRepository;
     }
 
-    public ResponseEntity<TicketModel> createTicket(TicketRequestDTO ticketDTO){
+    public ResponseEntity<TicketResponseDTO> createTicket(TicketRequestDTO ticketDTO){
 
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserModel user;
