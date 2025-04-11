@@ -23,7 +23,7 @@ public class TicketController {
 
     @Operation(summary = "Create a ticket")
     @PostMapping("create")
-    public ResponseEntity<TicketModel> createTicket(@RequestBody @Valid TicketRequestDTO ticketDTO){
+    public ResponseEntity createTicket(@RequestBody @Valid TicketRequestDTO ticketDTO){
         return tIcketService.createTicket(ticketDTO);
     }
 
