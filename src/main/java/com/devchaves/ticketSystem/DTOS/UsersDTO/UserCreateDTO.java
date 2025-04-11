@@ -1,10 +1,16 @@
 package com.devchaves.ticketSystem.DTOS.UsersDTO;
 
 import com.devchaves.ticketSystem.models.RoleEnum;
+import jakarta.validation.constraints.NotEmpty;
 
 public class UserCreateDTO {
+    @NotEmpty(message = "Name is required")
     private String usersName;
+
+    @NotEmpty(message = "Password is required")
     private String usersPass;
+
+    @NotEmpty(message = "Role is required")
     private RoleEnum usersRole;
 
     // Getters and Setters

@@ -12,12 +12,12 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 
 @Service
-public class TIcketService {
+public class TicketService {
 
     private final TicketRepository ticketRepository;
 
 
-    public TIcketService(TicketRepository ticketRepository) {
+    public TicketService(TicketRepository ticketRepository) {
         this.ticketRepository = ticketRepository;
     }
 

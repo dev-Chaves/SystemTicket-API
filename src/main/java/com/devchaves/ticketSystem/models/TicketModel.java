@@ -1,6 +1,7 @@
 package com.devchaves.ticketSystem.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -15,13 +16,16 @@ public class TicketModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID ticket_id;
 
+    @NotEmpty(message = "User is required")
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private UserModel user;
 
+    @NotEmpty(message = "Title is required")
     @Column(nullable = false)
     private String ticket_title;
 
+    @NotEmpty(message = "Description is required")
     @Column(nullable = false)
     private String ticket_description;
 
