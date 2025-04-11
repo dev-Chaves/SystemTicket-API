@@ -43,6 +43,20 @@ public class TicketService {
 
         ticketRepository.save(ticket);
 
-        return ResponseEntity.ok(ticket);
+        TicketResponseDTO responseDTO = convertToResponseDTO(ticket);
+
+        return ResponseEntity.ok().body(responseDTO);
     }
+
+    private TicketResponseDTO convertToResponseDTO(TicketModel ticket){
+        return new TicketResponseDTO(
+                ticket.getUser().getUsersName(),
+                ticket.getTicket_title(),
+                ticket.getTicket_description(),
+                ticket.getTicket_status(),
+                ticket.getObservation(),
+                ticket.getCreatedAt()
+        );
+    }
+
 }
