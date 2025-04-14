@@ -2,8 +2,10 @@ package com.devchaves.ticketSystem.controller;
 
 import com.devchaves.ticketSystem.DTOS.UsersDTO.UserCreateDTO;
 import com.devchaves.ticketSystem.DTOS.UsersDTO.UserRegisterDTO;
+import com.devchaves.ticketSystem.services.AdminService;
 import com.devchaves.ticketSystem.services.UserService;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,9 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
     private final UserService userService;
+    private final AdminService adminService;
 
-    public AuthController(UserService userService) {
+    public AuthController(UserService userService, AdminService adminService) {
         this.userService = userService;
+        this.adminService = adminService;
     }
 
     @Operation(summary = "Login user")

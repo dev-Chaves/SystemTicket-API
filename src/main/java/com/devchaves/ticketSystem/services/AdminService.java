@@ -20,7 +20,7 @@ public class AdminService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    private ResponseEntity<UserModel> createUser(@RequestBody UserCreateDTO userDTO){
+    public ResponseEntity<UserModel> createUser(@RequestBody UserCreateDTO userDTO){
 
         if(userDTO.getUsersName() == null || userDTO.getUsersPass() == null){
             return ResponseEntity.badRequest().body(null);
