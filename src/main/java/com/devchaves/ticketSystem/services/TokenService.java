@@ -3,12 +3,11 @@ package com.devchaves.ticketSystem.services;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.devchaves.ticketSystem.util.Util;
+import com.devchaves.ticketSystem.util.GenerationExpirationDate;
 import com.devchaves.ticketSystem.models.UserModel;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import javax.xml.crypto.Data;
 import java.util.Date;
 
 @Service
@@ -17,10 +16,10 @@ public class TokenService {
     @Value("${api.security.token.secret}")
     private String secret;
 
-    private final Util util;
+    private final GenerationExpirationDate generationExpirationDate;
 
-    public TokenService(Util util) {
-        this.util = util;
+    public TokenService(GenerationExpirationDate generationExpirationDate) {
+        this.generationExpirationDate = generationExpirationDate;
     }
 
     public String generateToken(UserModel user) {
@@ -32,7 +31,7 @@ public class TokenService {
 
             Algorithm algorithm = Algorithm.HMAC256(secret);
 
-            Date experationDate = Date.from(util.generationExpirationDate());
+            Date experationDate = Date.from(generationExpirationDate.generationExpirationDate());
 
             String token = JWT.create()
                     .withSubject(user.getUsersName())
