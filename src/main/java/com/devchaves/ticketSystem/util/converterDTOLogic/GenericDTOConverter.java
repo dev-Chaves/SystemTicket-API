@@ -1,4 +1,4 @@
-package com.devchaves.ticketSystem.util;
+package com.devchaves.ticketSystem.util.converterDTOLogic;
 
 import com.devchaves.ticketSystem.DTOS.GenericDTO;
 
