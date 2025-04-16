@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 
 @Component
-public class Util {
+public class GenerationExpirationDate {
 
 
     public Instant generationExpirationDate() {
