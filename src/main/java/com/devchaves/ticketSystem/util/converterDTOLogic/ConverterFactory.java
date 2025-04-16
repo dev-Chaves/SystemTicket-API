@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class ConvertFactory {
+public class ConverterFactory {
 
     private final Map<ConverterKey<?,?>, DTOConverter<?,?>> converters = new HashMap<>();
 
