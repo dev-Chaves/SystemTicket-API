@@ -1,5 +1,8 @@
 package com.devchaves.ticketSystem.util.converterDTOLogic;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class ConverseDTO {
 
     private final ConverterFactory converterFactory;
