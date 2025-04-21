@@ -1,10 +1,13 @@
 package com.devchaves.ticketSystem.services;
 
 import com.devchaves.ticketSystem.DTOS.UsersDTO.UserCreateDTO;
+import com.devchaves.ticketSystem.DTOS.UsersDTO.UserDefaultResponse;
 import com.devchaves.ticketSystem.models.RoleEnum;
 import com.devchaves.ticketSystem.models.UserModel;
 import com.devchaves.ticketSystem.repositories.UserRepository;
 import com.devchaves.ticketSystem.util.converterDTOLogic.ConverseDTO;
+import com.devchaves.ticketSystem.util.converters.UserDefaultToResponse;
+import com.devchaves.ticketSystem.util.converters.UserModelToResponseConverter;
 import com.devchaves.ticketSystem.util.converters.UserRequestToModelConverter;
 import org.apache.catalina.User;
 import org.springframework.http.ResponseEntity;
@@ -25,27 +28,25 @@ public class AdminService {
         this.converseDTO = converseDTO;
     }
 
-    public ResponseEntity<UserModel> createUser(@RequestBody UserCreateDTO userDTO){
+    public ResponseEntity<UserDefaultResponse> createUser(@RequestBody UserCreateDTO userDTO){
 
         if(userDTO.getUsersName() == null || userDTO.getUsersPass() == null){
             return ResponseEntity.badRequest().body(null);
         }
 
-        RoleEnum role = RoleEnum.USER;
+        var userDB = new UserModel();
 
-        var user = new UserModel();
+        UserRequestToModelConverter converter = new UserRequestToModelConverter(passwordEncoder);
 
-        UserRequestToModelConverter converter = new UserRequestToModelConverter(userDTO);
+        userDB = converter.convert(userDTO);
 
+        UserDefaultToResponse converterTeste = new UserDefaultToResponse(passwordEncoder);
 
-        user.setUsersName(user.getUsersName());
-        user.setUsersPass(passwordEncoder.encode(userDTO.getUsersPass()));
-        user.setUsersRole(role);
+        var response = converterTeste.convert(userDB);
 
+        userRepository.save(userDB);
 
-        userRepository.save(user);
-
-        return ResponseEntity.ok(user);
+        return ResponseEntity.ok().body(response);
 
     }
 
