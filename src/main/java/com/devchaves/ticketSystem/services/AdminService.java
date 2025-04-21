@@ -9,6 +9,7 @@ import com.devchaves.ticketSystem.models.TicketModel;
 import com.devchaves.ticketSystem.models.UserModel;
 import com.devchaves.ticketSystem.repositories.TicketRepository;
 import com.devchaves.ticketSystem.repositories.UserRepository;
+import com.devchaves.ticketSystem.util.VerifyRole.CheckerRole;
 import com.devchaves.ticketSystem.util.converterDTOLogic.ConverseDTO;
 import com.devchaves.ticketSystem.util.converters.TicketModelToResponseConverter;
 import com.devchaves.ticketSystem.util.converters.UserDefaultToResponse;
@@ -27,22 +28,32 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.util.Optional;
 import java.util.UUID;
 
+import static com.devchaves.ticketSystem.models.RoleEnum.ADMIN;
+
 @Service
 public class AdminService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final TicketRepository ticketRepository;
+    private final CheckerRole checker;
     private final ConverseDTO converseDTO;
 
-    public AdminService(UserRepository userRepository, PasswordEncoder passwordEncoder, TicketRepository ticketRepository, ConverseDTO converseDTO) {
+    public AdminService(UserRepository userRepository, PasswordEncoder passwordEncoder, TicketRepository ticketRepository, CheckerRole checker, ConverseDTO converseDTO) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.ticketRepository = ticketRepository;
+        this.checker = checker;
         this.converseDTO = converseDTO;
     }
 
-    public ResponseEntity<UserDefaultResponse> createUser(@RequestBody UserCreateDTO userDTO){
+    public ResponseEntity<?> createUser(@RequestBody UserCreateDTO userDTO){
+
+        UserModel currentUser = checker.checker(null);
+
+        if(currentUser.getUsersRole() != ADMIN){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Acesso negado");
+        }
 
         if(userDTO.getUsersName() == null || userDTO.getUsersPass() == null){
             return ResponseEntity.badRequest().body(null);
@@ -65,6 +76,12 @@ public class AdminService {
     }
 
     public ResponseEntity<?> updateTicketStatus(@PathVariable(value="ticketId")UUID ticketId,@RequestBody @Valid TicketRequestToFinish ticketDTO){
+
+        UserModel currentUser = checker.checker(null);
+
+        if(currentUser.getUsersRole() != ADMIN){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Acesso negado");
+        }
 
         if(ticketDTO == null){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
