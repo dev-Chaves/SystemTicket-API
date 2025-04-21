@@ -1,6 +1,7 @@
 package com.devchaves.ticketSystem.controller;
 
 import com.devchaves.ticketSystem.DTOS.UsersDTO.UserCreateDTO;
+import com.devchaves.ticketSystem.DTOS.UsersDTO.UserDTO;
 import com.devchaves.ticketSystem.DTOS.UsersDTO.UserRegisterDTO;
 import com.devchaves.ticketSystem.services.AdminService;
 import com.devchaves.ticketSystem.services.UserService;
@@ -26,8 +27,8 @@ public class AuthController {
 
     @Operation(summary = "Login user")
     @PostMapping("login")
-    public ResponseEntity login(@RequestBody UserCreateDTO userCreateDTO) {
-        return userService.userLogin(userCreateDTO);
+    public ResponseEntity login(@RequestBody UserDTO dto) {
+        return userService.userLogin(dto);
     }
 
     @Operation(summary = "Register user, only for admin with tokens valid")

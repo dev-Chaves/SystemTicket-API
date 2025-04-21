@@ -1,6 +1,6 @@
 package com.devchaves.ticketSystem.services;
 
-import com.devchaves.ticketSystem.DTOS.UsersDTO.UserCreateDTO;
+import com.devchaves.ticketSystem.DTOS.UsersDTO.UserDTO;
 import com.devchaves.ticketSystem.DTOS.UsersDTO.UserRegisterDTO;
 import com.devchaves.ticketSystem.DTOS.UsersDTO.UserResponseDTO;
 import com.devchaves.ticketSystem.models.RoleEnum;
@@ -32,7 +32,7 @@ public class UserService {
     @Value("${admin.token}")
     private String expectedAdminToken;
 
-    public ResponseEntity<UserResponseDTO> userLogin(UserCreateDTO userDTO){
+    public ResponseEntity<UserResponseDTO> userLogin(UserDTO userDTO){
 
         validateLoginCredentials(userDTO);
 
@@ -69,13 +69,13 @@ public class UserService {
         
     }
 
-    private void validateLoginCredentials(UserCreateDTO userDTO){
+    private void validateLoginCredentials(UserDTO userDTO){
         if(userDTO.getUsersName() == null || userDTO.getUsersPass() == null){
-            throw new RuntimeException("Invalid Credentials");
+            throw new RuntimeException("Invalid Credentials || Null");
         }
     }
 
-    private UserModel findValidateUser(UserCreateDTO userDTO){
+    private UserModel findValidateUser(UserDTO userDTO){
         var user = userRepository.findUserByUsersName(userDTO.getUsersName()).orElseThrow(() -> new RuntimeException("User Not Found"));
 
         if(!passwordEncoder.matches(userDTO.getUsersPass(), user.getUsersPass())){
