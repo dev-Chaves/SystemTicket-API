@@ -6,7 +6,16 @@ import java.util.UUID;
 
 public class TicketRequestToFinish {
     private UUID userId;
+    private UUID ticketId;
     private TicketStatus ticketStatus;
+
+    public UUID getTicketId() {
+        return ticketId;
+    }
+
+    public void setTicketId(UUID ticketId) {
+        this.ticketId = ticketId;
+    }
 
     public UUID getUserId() {
         return userId;

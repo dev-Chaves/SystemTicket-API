@@ -64,13 +64,13 @@ public class AdminService {
 
     }
 
-    public ResponseEntity<?> updateTicketStatus(@RequestBody @Valid TicketRequestToFinish ticketDTO){
+    public ResponseEntity<?> updateTicketStatus(@PathVariable(value="ticketId")UUID ticketId,@RequestBody @Valid TicketRequestToFinish ticketDTO){
 
         if(ticketDTO == null){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
 
-        Optional<TicketModel> ticket = ticketRepository.findById(ticketDTO.getUserId());
+        Optional<TicketModel> ticket = ticketRepository.findById(ticketId);
 
         if(!ticket.isPresent()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Ticket Not Found!");
