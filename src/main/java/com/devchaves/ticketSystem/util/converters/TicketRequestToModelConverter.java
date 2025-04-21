@@ -8,11 +8,11 @@ import com.devchaves.ticketSystem.util.converterDTOLogic.DTOConverter;
 
 import java.time.LocalDateTime;
 
-public class TIcketRequestToModelConverter implements DTOConverter<TicketRequestDTO, TicketModel> {
+public class TicketRequestToModelConverter implements DTOConverter<TicketRequestDTO, TicketModel> {
 
     private final UserModel user;
 
-    public TIcketRequestToModelConverter(UserModel user) {
+    public TicketRequestToModelConverter(UserModel user) {
         this.user = user;
     }
 

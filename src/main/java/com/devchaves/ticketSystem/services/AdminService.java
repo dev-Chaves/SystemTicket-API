@@ -64,7 +64,7 @@ public class AdminService {
 
     }
 
-    public ResponseEntity<?> finishTicket(@RequestBody @Valid TicketRequestToFinish ticketDTO){
+    public ResponseEntity<?> updateTicketStatus(@RequestBody @Valid TicketRequestToFinish ticketDTO){
 
         if(ticketDTO == null){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();

@@ -1,10 +1,12 @@
 package com.devchaves.ticketSystem.DTOS.TicketDTO;
 
+import com.devchaves.ticketSystem.models.TicketStatus;
+
 import java.util.UUID;
 
-public class TicketFinish {
+public class TicketRequestToFinish {
     private UUID userId;
-    private String ticketStatus;
+    private TicketStatus ticketStatus;
 
     public UUID getUserId() {
         return userId;
@@ -14,11 +16,11 @@ public class TicketFinish {
         this.userId = userId;
     }
 
-    public String getTicketStatus() {
+    public TicketStatus getTicketStatus() {
         return ticketStatus;
     }
 
-    public void setTicketStatus(String ticketStatus) {
+    public void setTicketStatus(TicketStatus ticketStatus) {
         this.ticketStatus = ticketStatus;
     }
 }

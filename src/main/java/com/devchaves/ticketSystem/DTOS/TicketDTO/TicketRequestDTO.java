@@ -1,5 +1,7 @@
 package com.devchaves.ticketSystem.DTOS.TicketDTO;
 
+import com.devchaves.ticketSystem.models.TicketStatus;
+
 import java.util.UUID;
 
 public class TicketRequestDTO {
@@ -7,7 +9,7 @@ public class TicketRequestDTO {
     private UUID userId;
     private String ticketTitle;
     private String ticketDescription;
-    private String ticketStatus;
+    private TicketStatus ticketStatus;
     private String observation;
 
     public UUID getUserId() {
@@ -34,11 +36,11 @@ public class TicketRequestDTO {
         this.ticketDescription = ticketDescription;
     }
 
-    public String getTicketStatus() {
+    public TicketStatus getTicketStatus() {
         return ticketStatus;
     }
 
-    public void setTicketStatus(String ticketStatus) {
+    public void setTicketStatus(TicketStatus ticketStatus) {
         this.ticketStatus = ticketStatus;
     }
 

@@ -6,14 +6,12 @@ import com.devchaves.ticketSystem.models.TicketModel;
 import com.devchaves.ticketSystem.models.UserModel;
 import com.devchaves.ticketSystem.repositories.TicketRepository;
 import com.devchaves.ticketSystem.util.converterDTOLogic.ConverseDTO;
-import com.devchaves.ticketSystem.util.converters.TIcketRequestToModelConverter;
+import com.devchaves.ticketSystem.util.converters.TicketRequestToModelConverter;
 import com.devchaves.ticketSystem.util.converters.TicketModelToResponseConverter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
 
 @Service
 public class TicketService {
@@ -38,7 +36,7 @@ public class TicketService {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
-        TIcketRequestToModelConverter converter = new TIcketRequestToModelConverter(user);
+        TicketRequestToModelConverter converter = new TicketRequestToModelConverter(user);
 
         TicketModel ticket = converter.convert(ticketDTO);
 
@@ -50,5 +48,4 @@ public class TicketService {
 
         return ResponseEntity.ok().body(response);
     }
-
 }
