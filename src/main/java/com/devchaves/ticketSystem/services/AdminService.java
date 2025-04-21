@@ -1,23 +1,17 @@
 package com.devchaves.ticketSystem.services;
 
 import com.devchaves.ticketSystem.DTOS.TicketDTO.TicketRequestToFinish;
-import com.devchaves.ticketSystem.DTOS.TicketDTO.TicketResponseDTO;
 import com.devchaves.ticketSystem.DTOS.UsersDTO.UserCreateDTO;
-import com.devchaves.ticketSystem.DTOS.UsersDTO.UserDefaultResponse;
-import com.devchaves.ticketSystem.models.RoleEnum;
 import com.devchaves.ticketSystem.models.TicketModel;
 import com.devchaves.ticketSystem.models.UserModel;
 import com.devchaves.ticketSystem.repositories.TicketRepository;
 import com.devchaves.ticketSystem.repositories.UserRepository;
-import com.devchaves.ticketSystem.util.VerifyRole.CheckerRole;
+import com.devchaves.ticketSystem.util.VerifyRole.ValidateAdminAccess;
 import com.devchaves.ticketSystem.util.converterDTOLogic.ConverseDTO;
 import com.devchaves.ticketSystem.util.converters.TicketModelToResponseConverter;
 import com.devchaves.ticketSystem.util.converters.UserDefaultToResponse;
-import com.devchaves.ticketSystem.util.converters.UserModelToResponseConverter;
 import com.devchaves.ticketSystem.util.converters.UserRequestToModelConverter;
 import jakarta.validation.Valid;
-import org.apache.catalina.User;
-import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -36,10 +30,10 @@ public class AdminService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final TicketRepository ticketRepository;
-    private final CheckerRole checker;
+    private final ValidateAdminAccess checker;
     private final ConverseDTO converseDTO;
 
-    public AdminService(UserRepository userRepository, PasswordEncoder passwordEncoder, TicketRepository ticketRepository, CheckerRole checker, ConverseDTO converseDTO) {
+    public AdminService(UserRepository userRepository, PasswordEncoder passwordEncoder, TicketRepository ticketRepository, ValidateAdminAccess checker, ConverseDTO converseDTO) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.ticketRepository = ticketRepository;
