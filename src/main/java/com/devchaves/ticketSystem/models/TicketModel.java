@@ -29,8 +29,9 @@ public class TicketModel implements Serializable {
     @Column(nullable = false)
     private String ticket_description;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String ticket_status;
+    private TicketStatus ticket_status;
 
     @Column(nullable = false)
     private String observation;
@@ -73,11 +74,11 @@ public class TicketModel implements Serializable {
         this.ticket_description = ticket_description;
     }
 
-    public String getTicket_status() {
+    public TicketStatus getTicket_status() {
         return ticket_status;
     }
 
-    public void setTicket_status(String ticket_status) {
+    public void setTicket_status(TicketStatus ticket_status) {
         this.ticket_status = ticket_status;
     }
 
