@@ -1,8 +1,6 @@
 package com.devchaves.ticketSystem.util.VerifyRole;
 
 import com.devchaves.ticketSystem.models.UserModel;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -10,10 +8,8 @@ import org.springframework.stereotype.Component;
 
 import java.nio.file.AccessDeniedException;
 
-import static com.devchaves.ticketSystem.models.RoleEnum.ADMIN;
-
 @Component
-public class CheckerRole implements VerifyRole {
+public class ValidateAdminAccess implements VerifyRole {
 
     @Override
     public UserModel checker(Object source) {
