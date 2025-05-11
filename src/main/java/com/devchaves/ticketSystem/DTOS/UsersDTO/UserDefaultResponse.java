@@ -1,9 +1,12 @@
 package com.devchaves.ticketSystem.DTOS.UsersDTO;
 
+import com.devchaves.ticketSystem.models.RoleEnum;
+
 public class UserDefaultResponse {
 
     private String username;
     private String userpass;
+    private RoleEnum usersRole;
 
 
     public String getUsername() {
@@ -20,5 +23,13 @@ public class UserDefaultResponse {
 
     public void setUserpass(String userpass) {
         this.userpass = userpass;
+    }
+
+    public RoleEnum getUsersRole() {
+        return usersRole;
+    }
+
+    public void setUsersRole(RoleEnum usersRole) {
+        this.usersRole = usersRole;
     }
 }

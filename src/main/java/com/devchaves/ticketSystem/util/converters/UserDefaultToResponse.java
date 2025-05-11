@@ -20,6 +20,7 @@ public class UserDefaultToResponse implements DTOConverter<UserModel, UserDefaul
 
         userDefaultResponse.setUsername(source.getUsersName());
         userDefaultResponse.setUserpass(passwordEncoder.encode(source.getUsersPass()));
+        userDefaultResponse.setUsersRole(source.getUsersRole());
 
         return userDefaultResponse;
     }
