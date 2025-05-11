@@ -3,7 +3,7 @@ version: '3.8'
 services:
 
   app:
-    build: .
+    build: ..
     container_name: system_ticket_spring
     ports:
       - "8080:8080"
